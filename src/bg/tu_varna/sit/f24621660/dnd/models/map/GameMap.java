@@ -1,8 +1,8 @@
-package bg.tu_varna.sit.f24621660.dnd.models;
+package bg.tu_varna.sit.f24621660.dnd.models.map;
 
 import bg.tu_varna.sit.f24621660.dnd.core.map.MapGenerator;
 
-public class  Map {
+public class GameMap {
     //Пример на инстанция на мап:
     char[][] cellType = MapGenerator.generateMap(1);
 

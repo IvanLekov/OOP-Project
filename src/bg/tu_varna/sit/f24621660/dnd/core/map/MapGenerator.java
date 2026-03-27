@@ -1,7 +1,5 @@
 package bg.tu_varna.sit.f24621660.dnd.core.map;
 
-import bg.tu_varna.sit.f24621660.dnd.models.Map;
-
 public final class MapGenerator {
 
     static final private char treasure = 'T';

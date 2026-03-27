@@ -1,25 +1,35 @@
 package bg.tu_varna.sit.f24621660.dnd.models.hero.statistics;
 
 public class ResourceStat extends Stat{
-    private double value;
-    private double maxValue;
+    private int maxValue;
 
-    public ResourceStat(double maxValue) {
+    public ResourceStat(int maxValue) {
+        super(maxValue);
         this.maxValue = maxValue;
-        value = maxValue;
+    }
+
+    public int getMaxvalue() {
+        return maxValue;
     }
 
     @Override
-    public void increase(double amount) {
-        value += amount;
+    public void increase(int amount) {
+        super.increase(amount);
+
+        if (this.value > this.maxValue) {
+            this.value = this.maxValue;
+        }
     }
 
-    public void decrease(double amount) {
-        value -= amount;
+    public void decrease(int amount) {
+        this.value -=amount;
+
+        if (this.value < 0) {
+            this.value = 0;
+        }
     }
 
-    public void increaseMax(double amount) {
-        maxValue += amount;
+    public void increaseMax (int amount) {
+        this.maxValue += amount;
     }
-
 }
