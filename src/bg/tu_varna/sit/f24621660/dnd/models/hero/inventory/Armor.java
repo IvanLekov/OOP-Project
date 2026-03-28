@@ -18,8 +18,8 @@ public class Armor extends Item {
         return damageDecrease;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s (Защита: %.1f%%)", getName(), damageDecrease * 100);
+    public double calculateReducedDamage(double incomingDamage) {
+        return incomingDamage - (incomingDamage * this.getDamageDecrease());
     }
+
 }

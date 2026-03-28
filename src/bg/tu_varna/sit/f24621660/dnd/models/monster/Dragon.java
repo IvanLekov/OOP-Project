@@ -1,27 +1,18 @@
 package bg.tu_varna.sit.f24621660.dnd.models.monster;
 
+import bg.tu_varna.sit.f24621660.dnd.models.hero.statistics.LevelStat;
 import bg.tu_varna.sit.f24621660.dnd.models.hero.statistics.PowerStat;
 import bg.tu_varna.sit.f24621660.dnd.models.hero.statistics.ResourceStat;
 
-public class Dragon {
-    private ResourceStat health;
-    private PowerStat strength;
-    private PowerStat mana;
-    private double armorPercentage;
+public class Dragon extends Monster{
 
     public Dragon(int level) {
-        int baseHealth = 50;
-        int baseStrength = 25;
-        int baseMana = 25;
-        double baseArmor = 0.15;
+        this.health = new ResourceStat(50);
+        this.mana = new PowerStat(25);
+        this.strength = new PowerStat(25);
+        this.level = new LevelStat(1);
 
-        int levelBonus = level - 1;
-
-        this.health = new ResourceStat(baseHealth + (levelBonus * 10));
-        this.strength = new PowerStat(baseStrength + (levelBonus * 10));
-        this.mana = new PowerStat(baseMana + (levelBonus * 10));
-
-        this.armorPercentage = baseArmor + (levelBonus * 0.05);
+        levelBonus(level);
     }
 
     public ResourceStat getHealth() {
@@ -36,17 +27,7 @@ public class Dragon {
         return mana;
     }
 
-    public double getArmorPercentage() {
-        return armorPercentage;
-    }
-
-    public boolean isAlive() {
-        return this.health.getValue() > 0;
-    }
-
-    public void takeDamage(int incomingDamage) {
-        double blockedDamage = incomingDamage * this.armorPercentage;
-        int actualDamage = (int) (incomingDamage - blockedDamage);
-        this.health.decrease(actualDamage);
+    public void takeDamage(double incomingDamage) {
+        this.health.decrease((int) armor.calculateReducedDamage(incomingDamage));
     }
 }
