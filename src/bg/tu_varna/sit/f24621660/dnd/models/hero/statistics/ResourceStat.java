@@ -22,7 +22,7 @@ public class ResourceStat extends Stat{
     }
 
     public void decrease(int amount) {
-        this.value -=amount;
+        this.value -= amount;
 
         if (this.value < 0) {
             this.value = 0;

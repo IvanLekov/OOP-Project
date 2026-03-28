@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.models.hero.inventory;
 
 public class Weapon extends Item {
+
     private final double damageIncrease;
 
     public Weapon(String name, double damageIncrease) {
@@ -17,8 +18,7 @@ public class Weapon extends Item {
         return damageIncrease;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s (Оръжие: %.1f%%)", getName(), damageIncrease * 100);
+    public double calculateAmpedDamage(double baseAttack) {
+        return baseAttack + (baseAttack * this.getDamageIncrease());
     }
 }
