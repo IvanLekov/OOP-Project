@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621660.dnd.models.map;
+package bg.tu_varna.sit.f24621660.dnd.world;
 
 import bg.tu_varna.sit.f24621660.dnd.core.map.MapGenerator;
 

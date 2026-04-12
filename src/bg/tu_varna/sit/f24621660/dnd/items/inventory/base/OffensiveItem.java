@@ -1,16 +1,13 @@
-package bg.tu_varna.sit.f24621660.dnd.models.hero.inventory;
+package bg.tu_varna.sit.f24621660.dnd.items.inventory.base;
 
-public class Weapon extends Item {
-
+public class OffensiveItem extends Item {
     private final double damageIncrease;
 
-    public Weapon(String name, double damageIncrease) {
+    public OffensiveItem(String name, double damageIncrease) {
         super(name);
-
         if (damageIncrease < 0.0 || damageIncrease > 1.0) {
             throw new IllegalArgumentException("Percent must be between 0.0 and 1.0");
         }
-
         this.damageIncrease = damageIncrease;
     }
 
@@ -18,7 +15,7 @@ public class Weapon extends Item {
         return damageIncrease;
     }
 
-    public double calculateAmpedDamage(double baseAttack) {
-        return baseAttack + (baseAttack * this.getDamageIncrease());
+    public double calculateAmpedDamage(double baseStat) {
+        return baseStat + (baseStat * this.damageIncrease);
     }
 }
