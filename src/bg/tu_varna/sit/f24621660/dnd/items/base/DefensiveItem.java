@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621660.dnd.items.inventory.base;
+package bg.tu_varna.sit.f24621660.dnd.items.base;
 
 public abstract class DefensiveItem extends Item {
     private final double damageDecrease;
@@ -11,7 +11,12 @@ public abstract class DefensiveItem extends Item {
         this.damageDecrease = damageDecrease;
     }
 
-    public double calculateReducedDamage(double incomingDamage) {
-        return incomingDamage - (incomingDamage * this.damageDecrease);
+    public int calculateReducedDamage(int incomingDamage) {
+        double reduced = incomingDamage - (incomingDamage * getDamageDecrease());
+        return (int) Math.round(reduced);
+    }
+
+    public double getDamageDecrease() {
+        return damageDecrease;
     }
 }

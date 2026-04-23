@@ -1,16 +1,14 @@
-package bg.tu_varna.sit.f24621660.dnd.entities.stats;
+package bg.tu_varna.sit.f24621660.dnd.entities.stats.models;
 
-import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.Depletable;
-import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.Stat;
-import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.Upgradeable;
+import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.types.Resource;
 
-public class ResourceStat implements Stat, Upgradeable, Depletable {
+public class ResourceStat implements Resource {
     private int maxValue;
     private int currentValue;
 
     public ResourceStat(int maxValue) {
         this.maxValue = maxValue;
-        this.currentValue = maxValue; // Започва на макс
+        this.currentValue = maxValue;
     }
 
     @Override
@@ -18,15 +16,14 @@ public class ResourceStat implements Stat, Upgradeable, Depletable {
         return currentValue;
     }
 
+    @Override
     public int getMaxValue() {
         return maxValue;
     }
 
     @Override
     public void upgrade(int points) {
-        // При ресурсите, надграждането вдига МАКСИМУМА
         this.maxValue += points;
-        // Опционално: лекува героя с новите точки
         this.currentValue += points;
     }
 
