@@ -12,12 +12,7 @@ public class OffensiveItem extends Item {
     }
 
     public int calculateAmpedDamage(int baseStat) {
-        double amped = baseStat + (baseStat * this.getDamageIncrease());
+        double amped = baseStat + (baseStat * this.damageIncrease);
         return (int) Math.round(amped);
     }
-
-    public double getDamageIncrease() {
-        return damageIncrease;
-    }
-
 }

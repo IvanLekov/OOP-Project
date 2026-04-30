@@ -1,0 +1,5 @@
+# MinLevel, MaxLevel, Type, Name, Bonus
+1, 2, WEAPON, Rusted Sword, 0.15
+1, 2, SPELL, Spark, 0.15
+1, 2, ARMOR, Torn Tunic, 0.10
+3, 4, WEAPON, Steel Longsword, 0.25
