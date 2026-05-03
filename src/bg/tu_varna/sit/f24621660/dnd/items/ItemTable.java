@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.items;
 
 import bg.tu_varna.sit.f24621660.dnd.items.base.Item;
-import bg.tu_varna.sit.f24621660.dnd.utills.loaders.ItemLoader;
+import bg.tu_varna.sit.f24621660.dnd.io.loaders.ItemTableLoader;
 
 import java.util.List;
 import java.util.Random;
@@ -10,7 +10,7 @@ public class ItemTable {
     private List<Item> items;
     private Random random;
 
-    public ItemTable(int mapLevel, ItemLoader itemLoader) {
+    public ItemTable(int mapLevel, ItemTableLoader itemLoader) {
         this.items = itemLoader.load(mapLevel);
         this.random = new Random();
 

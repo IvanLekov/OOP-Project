@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621660.dnd.utills.parsers;
+package bg.tu_varna.sit.f24621660.dnd.io.parsers;
 
 import bg.tu_varna.sit.f24621660.dnd.items.base.Item;
 import bg.tu_varna.sit.f24621660.dnd.items.equipment.Armor;

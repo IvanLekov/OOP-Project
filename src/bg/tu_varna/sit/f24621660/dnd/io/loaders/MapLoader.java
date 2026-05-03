@@ -1,12 +1,13 @@
-package bg.tu_varna.sit.f24621660.dnd.utills.loaders;
+package bg.tu_varna.sit.f24621660.dnd.io.loaders;
 
-import bg.tu_varna.sit.f24621660.dnd.utills.parsers.MapParser;
-import bg.tu_varna.sit.f24621660.dnd.utills.readers.TextFileReader;
+import bg.tu_varna.sit.f24621660.dnd.io.parsers.MapParser;
+import bg.tu_varna.sit.f24621660.dnd.io.readers.GameFileReader;
+import bg.tu_varna.sit.f24621660.dnd.io.readers.TextFileReader;
 
 import java.util.List;
 
 public class MapLoader {
-    private final TextFileReader fileReader;
+    private final GameFileReader fileReader;
     private final MapParser mapParser;
 
     public MapLoader() {

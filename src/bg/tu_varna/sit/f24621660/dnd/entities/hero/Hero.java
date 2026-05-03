@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.hero;
 
 import bg.tu_varna.sit.f24621660.dnd.core.GameState;
-import bg.tu_varna.sit.f24621660.dnd.core.enums.GameStatus;
+import bg.tu_varna.sit.f24621660.dnd.core.states.State;
 import bg.tu_varna.sit.f24621660.dnd.entities.base.Combatant;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Attribute;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Progressable;
@@ -63,7 +63,7 @@ public abstract class Hero extends Combatant {
         int restoreAmount = (int) (maxHealth * RESTORE_PERCENT);
         this.getHealth().restore(restoreAmount);
 
-        GameState.getInstance().setStatus(GameStatus.EXPLORATION);
+        GameState.getInstance().setState(State.EXPLORATION);
     }
 
     public void levelUp(int addStr, int addMana, int addHealth) {
@@ -77,7 +77,7 @@ public abstract class Hero extends Combatant {
         this.getMana().upgrade(addMana);
         this.getHealth().upgrade(addHealth);
 
-        GameState.getInstance().setStatus(GameStatus.EXPLORATION);
+        GameState.getInstance().setState(State.EXPLORATION);
     }
 
     public void equipArmor(Armor armor) {

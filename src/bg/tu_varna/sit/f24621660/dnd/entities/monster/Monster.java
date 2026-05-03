@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.monster;
 
 import bg.tu_varna.sit.f24621660.dnd.core.GameState;
-import bg.tu_varna.sit.f24621660.dnd.core.enums.GameStatus;
+import bg.tu_varna.sit.f24621660.dnd.core.states.State;
 import bg.tu_varna.sit.f24621660.dnd.entities.base.Combatant;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Attribute;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Resource;
@@ -24,6 +24,6 @@ public abstract class Monster extends Combatant {
 
     @Override
     public void handleVictory() {
-        GameState.getInstance().setStatus(GameStatus.GAME_OVER);
+        GameState.getInstance().setState(State.GAME_OVER);
     }
 }

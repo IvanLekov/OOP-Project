@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621660.dnd.utills.parsers;
+package bg.tu_varna.sit.f24621660.dnd.io.parsers;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ public class MapParser {
         char[][] grid = new char[rows][cols];
 
         for (int i = 0; i < rows; i++) {
-            String line = lines.get(i);//reads a row one by one
+            String line = lines.get(i);
             if (line.length() != cols) {
                 throw new IllegalArgumentException("Inconsistent row length in map level " + mapLevel);
             }
-            grid[i] = line.toCharArray();//converts the red row to char array
+            grid[i] = line.toCharArray();
         }
 
-        return grid;//returns the red row
+        return grid;
     }
 }

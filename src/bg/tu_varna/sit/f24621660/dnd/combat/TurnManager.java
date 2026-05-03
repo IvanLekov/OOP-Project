@@ -4,18 +4,19 @@ import java.util.Random;
 
 public class TurnManager {
     private final Random random;
-    private boolean isHeroTurn;
+    private boolean heroTurn;
 
     public TurnManager() {
-        random = new Random();
+        this.random = new Random();
 
-        isHeroTurn = random.nextBoolean();
+        this.heroTurn = random.nextBoolean();
     }
 
     public boolean isHeroTurn() {
-        return isHeroTurn;
+        return heroTurn;
     }
-    public boolean isMonsterTurn() {
-        return !isHeroTurn;
+    public void passTurn() {
+        this.heroTurn = !this.heroTurn;
     }
+
 }
