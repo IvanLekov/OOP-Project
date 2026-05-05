@@ -9,14 +9,20 @@ import bg.tu_varna.sit.f24621660.dnd.entities.stats.models.ResourceStat;
 
 public class Human extends Hero {
 
+    private static final int BASE_HEALTH = 50;
+    private static final int BASE_STRENGTH = 30;
+    private static final int BASE_MANA = 20;
+    private static final int START_LEVEL = 1;
+    private static final double BASE_DAMAGE_INCREASE = 0.2;
+
     public Human() {
         super(
-                new ResourceStat(50),
-                new PowerStat(30),
-                new PowerStat(20),
-                new LevelStat(1),
-                new Weapon("Basic sword", 0.20),
-                new Spell("Fire ball", 0.20)
+                new ResourceStat(BASE_HEALTH),
+                new PowerStat(BASE_STRENGTH),
+                new PowerStat(BASE_MANA),
+                new LevelStat(START_LEVEL),
+                new Weapon("Basic sword", BASE_DAMAGE_INCREASE),
+                new Spell("Fire ball", BASE_DAMAGE_INCREASE)
         );
     }
 }

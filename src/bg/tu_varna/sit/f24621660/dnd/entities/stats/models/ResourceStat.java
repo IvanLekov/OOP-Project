@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.stats.models;
 
-import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.types.Resource;
+import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Resource;
 
 public class ResourceStat implements Resource {
     private int maxValue;

@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.f24621660.dnd.items.base;
 
-public class OffensiveItem extends Item {
+public abstract class OffensiveItem extends Item {
     private final double damageIncrease;
 
     public OffensiveItem(String name, double damageIncrease) {
@@ -12,12 +12,7 @@ public class OffensiveItem extends Item {
     }
 
     public int calculateAmpedDamage(int baseStat) {
-        double amped = baseStat + (baseStat * this.getDamageIncrease());
+        double amped = baseStat + (baseStat * this.damageIncrease);
         return (int) Math.round(amped);
     }
-
-    public double getDamageIncrease() {
-        return damageIncrease;
-    }
-
 }
