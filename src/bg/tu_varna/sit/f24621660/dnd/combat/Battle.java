@@ -6,51 +6,52 @@ import bg.tu_varna.sit.f24621660.dnd.entities.hero.Hero;
 import bg.tu_varna.sit.f24621660.dnd.entities.monster.Monster;
 
 public class Battle {
-    private Hero hero;
-    private Monster monster;
-
-    private AttackManager attack;
-    private TurnManager turn;
+    private final Hero hero;
+    private final Monster monster;
+    private final AttackManager attack;
+    private final TurnManager turn;
 
     public Battle(Hero hero, Monster monster) {
         this.hero = hero;
         this.monster = monster;
-
-        this.turn  = new TurnManager();
+        this.turn = new TurnManager();
         this.attack = new AttackManager(hero, monster);
 
         startBattle();
     }
 
     private void startBattle() {
-        GameState.getInstance().setState(State.COMBAT);
+        GameState.changeTo(State.COMBAT);
     }
 
-    public void processTurn() {
+    public void processTurn(AttackType heroChoice) {
         if (turn.isHeroTurn()) {
-            attack.processHeroAttack();
-        }
-        else {
+            attack.processHeroAttack(heroChoice);
+        } else {
             attack.processMonsterAttack();
         }
 
-        turn.passTurn();
+        checkBattleOutcome();
+
+        if (GameState.current() == State.COMBAT) {
+            turn.passTurn();
+        }
     }
 
-
-    public String turnState() {
-        if (turn.isHeroTurn()) {
-            return "It's Hero's turn!";
+    private void checkBattleOutcome() {
+        if (monster.getHealth().getValue() <= 0) {
+            hero.handleVictory();
+            GameState.changeTo(State.EXPLORATION);
+        } else if (hero.getHealth().getValue() <= 0) {
+            GameState.changeTo(State.GAME_OVER);
         }
-        else
-            return "It's Monster's turn!";
+    }
+    public String turnState() {
+        return turn.isHeroTurn() ? "It's Hero's turn!" : "It's Monster's turn!";
     }
 
     public String healthState() {
-        int heroHealth = hero.getHealth().getValue();
-        int monsterHealth = monster.getHealth().getValue();
-
-        return String.format("Hero health: %d \n Monster health: %d", heroHealth, monsterHealth);
+        return String.format("Hero health: %d \nMonster health: %d",
+                hero.getHealth().getValue(), monster.getHealth().getValue());
     }
-
 }

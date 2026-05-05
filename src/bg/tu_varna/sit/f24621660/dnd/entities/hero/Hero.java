@@ -51,19 +51,14 @@ public abstract class Hero extends Combatant {
 
     @Override
     public void takeDamage(int amount) {
-        if (this.armor != null) {
-            this.getHealth().deplete(armor.calculateReducedDamage(amount));
-        }
-        this.getHealth().deplete(amount);
+        int finalDamage = (this.armor != null) ? armor.calculateReducedDamage(amount) : amount;
+        this.getHealth().deplete(finalDamage);
     }
 
-    @Override
     public void handleVictory() {
         int maxHealth = getHealth().getMaxValue();
         int restoreAmount = (int) (maxHealth * RESTORE_PERCENT);
         this.getHealth().restore(restoreAmount);
-
-        GameState.getInstance().setState(State.EXPLORATION);
     }
 
     public void levelUp(int addStr, int addMana, int addHealth) {
@@ -76,19 +71,17 @@ public abstract class Hero extends Combatant {
         this.getStrength().upgrade(addStr);
         this.getMana().upgrade(addMana);
         this.getHealth().upgrade(addHealth);
-
-        GameState.getInstance().setState(State.EXPLORATION);
     }
 
-    public void equipArmor(Armor armor) {
+    public void equipArmor(DefensiveItem armor) {
         this.armor = armor;
     }
 
-    public void equipWeapon(Weapon weapon) {
+    public void equipWeapon(OffensiveItem weapon) {
         this.weapon = weapon;
     }
 
-    public void equipSpell(Spell spell) {
+    public void equipSpell(OffensiveItem spell) {
         this.spell = spell;
     }
 

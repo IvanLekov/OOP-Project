@@ -4,9 +4,10 @@ import java.util.List;
 
 public class MapParser {
 
-    public char[][] parse(List<String> lines, int mapLevel) {
+    // Вече не приема mapLevel
+    public char[][] parse(List<String> lines) {
         if (lines == null || lines.isEmpty()) {
-            throw new IllegalStateException("Map data is invalid for level " + mapLevel);
+            throw new IllegalStateException("Map data is invalid or empty.");
         }
 
         int rows = lines.size();
@@ -16,7 +17,7 @@ public class MapParser {
         for (int i = 0; i < rows; i++) {
             String line = lines.get(i);
             if (line.length() != cols) {
-                throw new IllegalArgumentException("Inconsistent row length in map level " + mapLevel);
+                throw new IllegalArgumentException("Inconsistent row length detected in map data.");
             }
             grid[i] = line.toCharArray();
         }

@@ -1,13 +1,12 @@
-package bg.tu_varna.sit.f24621660.dnd.world.models;
+package bg.tu_varna.sit.f24621660.dnd.world.models.map;
 
 
-import bg.tu_varna.sit.f24621660.dnd.io.loaders.MapLoader;
 
 public class GameMap {
     private final char[][] grid;
 
-    public GameMap(int mapLevel, MapLoader mapLoader) {
-        this.grid = mapLoader.load(mapLevel);
+    public GameMap(char[][] grid) {
+        this.grid = grid;
     }
 
     public void setCell(int x, int y, char symbol) {
@@ -27,10 +26,22 @@ public class GameMap {
         return isValidBounds(x, y) && grid[x][y] != '#';
     }
 
-
     private boolean isValidBounds(int x, int y) {
         return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
     }
+
+    @Override
+    public String toString() { // Преименувано от getGameMap()
+        StringBuilder builder = new StringBuilder();
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                builder.append(grid[row][col]);
+            }
+            builder.append(System.lineSeparator());
+        }
+        return builder.toString();
+    }
+
 
     public int getRowsCount() { return grid.length; }
     public int getColsCount() { return grid[0].length; }

@@ -1,9 +1,8 @@
 package bg.tu_varna.sit.f24621660.dnd.world;
 
-import bg.tu_varna.sit.f24621660.dnd.world.logic.WorldPopulator;
-import bg.tu_varna.sit.f24621660.dnd.world.models.GameMap;
-import bg.tu_varna.sit.f24621660.dnd.world.models.InteractionType;
-import bg.tu_varna.sit.f24621660.dnd.world.models.Position;
+import bg.tu_varna.sit.f24621660.dnd.world.models.map.GameMap;
+import bg.tu_varna.sit.f24621660.dnd.world.models.enums.InteractionType;
+import bg.tu_varna.sit.f24621660.dnd.world.models.map.Position;
 
 public class GameMapManager {
     private final GameMap gameMap;
@@ -41,15 +40,17 @@ public class GameMapManager {
 
 
     private InteractionType handleCellInteraction(int x, int y) {
-        char cellSymbol = gameMap.getCell(x, y);
+        if (x == gameMap.getRowsCount() - 1 && y == gameMap.getColsCount() - 1) {
+            return InteractionType.EXIT;
+        }
 
+        char cellSymbol = gameMap.getCell(x, y);
         return switch (cellSymbol) {
             case 'M' -> InteractionType.MONSTER;
             case 'T' -> InteractionType.TREASURE;
             default -> InteractionType.PATH;
         };
     }
-
     public Position getHeroPosition() {
         return heroPosition;
     }

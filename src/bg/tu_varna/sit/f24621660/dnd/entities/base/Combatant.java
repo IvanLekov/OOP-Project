@@ -19,7 +19,6 @@ public abstract class Combatant {
     public abstract int getStrengthDamage();
     public abstract int getSpellDamage();
     public abstract void takeDamage(int amount);
-    public abstract void handleVictory();
 
     public Resource getHealth() {
         return health;

@@ -21,9 +21,4 @@ public abstract class Monster extends Combatant {
     public int getSpellDamage() {
         return this.getMana().getValue();
     }
-
-    @Override
-    public void handleVictory() {
-        GameState.getInstance().setState(State.GAME_OVER);
-    }
 }

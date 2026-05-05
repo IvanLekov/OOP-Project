@@ -1,21 +1,16 @@
 package bg.tu_varna.sit.f24621660.dnd.cli;
 
 import bg.tu_varna.sit.f24621660.dnd.cli.command.Command;
-import bg.tu_varna.sit.f24621660.dnd.cli.command.file.OpenCommand;
+import bg.tu_varna.sit.f24621660.dnd.cli.command.CommandFactory;
 import bg.tu_varna.sit.f24621660.dnd.core.GameContext;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Arrays;
+import bg.tu_varna.sit.f24621660.dnd.core.GameState;
+import bg.tu_varna.sit.f24621660.dnd.core.states.State;
 
 public class CommandParser {
-    private final Map<String, Command> commands = new HashMap<>();
+    private final CommandFactory commandFactory;
 
-    public CommandParser() {
-        // Тук регистрираме всички команди
-        commands.put("open", new OpenCommand());
-        // commands.put("close", new CloseCommand());
-        // commands.put("save", new SaveCommand());
+    public CommandParser(CommandFactory commandFactory) {
+        this.commandFactory = commandFactory;
     }
 
     public String processInput(GameContext context, String input) {
@@ -23,19 +18,38 @@ public class CommandParser {
             return "Моля, въведете команда.";
         }
 
-        // Разделяме входа по интервали (един или повече)
-        String[] tokens = input.trim().split("\\s+");
-        String commandName = tokens[0].toLowerCase();
+        String lowerInput = input.trim().toLowerCase();
+        String commandName = extractCommandName(lowerInput);
 
-        // Взимаме само аргументите (всичко след първата дума)
-        String[] args = Arrays.copyOfRange(tokens, 1, tokens.length);
+        String[] args = extractArguments(lowerInput, commandName);
 
-        Command command = commands.get(commandName);
+        State currentState = GameState.current();
+        Command command = commandFactory.getCommand(currentState, commandName);
+
         if (command == null) {
-            return "Грешка: Непозната команда '" + commandName + "'.";
+            return "Непозната команда или не може да се използва в текущия режим (" + currentState + ").";
         }
 
-        // Изпълняваме командата и връщаме резултата
         return command.execute(context, args);
+    }
+
+    private String extractCommandName(String input) {
+        if (input.startsWith("move ") || input.startsWith("attack ") || input.startsWith("loot ") || input.startsWith("save as")) {
+            String[] parts = input.split("\\s+");
+            if (parts.length >= 2) {
+                return parts[0] + " " + parts[1];
+            }
+        }
+        return input.split("\\s+")[0];
+    }
+
+    private String[] extractArguments(String input, String commandName) {
+        String argsString = input.substring(commandName.length()).trim();
+
+        if (argsString.isEmpty()) {
+            return new String[0];
+        }
+
+        return argsString.split("\\s+");
     }
 }

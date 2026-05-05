@@ -10,18 +10,18 @@ public class GameState {
         this.currentState = State.EXPLORATION;
     }
 
-    public static GameState getInstance() {
+    private static GameState getInstance() {
         if (instance == null) {
             instance = new GameState();
         }
         return instance;
     }
-
-    public State getCurrentState() {
-        return currentState;
+    
+    public static State current() {
+        return getInstance().currentState;
     }
 
-    public void setState(State newStatus) {
-        this.currentState = newStatus;
+    public static void changeTo(State newState) {
+        getInstance().currentState = newState;
     }
 }

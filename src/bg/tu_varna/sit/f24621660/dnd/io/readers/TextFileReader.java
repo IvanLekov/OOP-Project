@@ -13,8 +13,8 @@ public class TextFileReader implements GameFileReader {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = reader.readLine()) != null) {//reads each line
-                if (line.trim().isEmpty() || line.startsWith("#")) {//ignores empty spaces and comments
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
                     continue;
                 }
                 lines.add(line);

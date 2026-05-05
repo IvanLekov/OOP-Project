@@ -37,10 +37,8 @@ public class Dragon extends Monster {
 
     @Override
     public void takeDamage(int amount) {
-        if (this.armor != null) {
-            this.getHealth().deplete(armor.calculateReducedDamage(amount));
-        }
-        this.getHealth().deplete(amount);
+        int finalDamage = (this.armor != null) ? armor.calculateReducedDamage(amount) : amount;
+        this.getHealth().deplete(finalDamage);
     }
 
 }

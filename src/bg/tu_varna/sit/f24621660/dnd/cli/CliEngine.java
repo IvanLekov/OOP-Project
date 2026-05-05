@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.f24621660.dnd.cli;
 
-// CliEngine.java
+import bg.tu_varna.sit.f24621660.dnd.cli.command.CommandFactory;
 import bg.tu_varna.sit.f24621660.dnd.core.GameContext;
 
 import java.util.Scanner;
@@ -12,21 +12,17 @@ public class CliEngine {
 
     public CliEngine() {
         this.context = new GameContext();
-        this.parser = new CommandParser();
+        CommandFactory factory = new CommandFactory();
+        this.parser = new CommandParser(factory);
         this.scanner = new Scanner(System.in);
     }
 
     public void run() {
-        System.out.println("Добре дошли в D&D играта! Въведете команда (или 'exit' за изход):");
-
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine();
 
-            if (input.trim().equalsIgnoreCase("exit")) {
-                System.out.println("Излизане от програмата...");
-                break;
-            }
+            if (input.trim().equalsIgnoreCase("exit")) break;
 
             String outputMessage = parser.processInput(context, input);
             System.out.println(outputMessage);

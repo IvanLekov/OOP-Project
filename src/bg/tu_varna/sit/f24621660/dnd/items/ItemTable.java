@@ -10,13 +10,12 @@ public class ItemTable {
     private List<Item> items;
     private Random random;
 
-    public ItemTable(int mapLevel, ItemTableLoader itemLoader) {
-        this.items = itemLoader.load(mapLevel);
-        this.random = new Random();
-
-        if (this.items.isEmpty()) {
-            throw new IllegalStateException("No items were loaded for level: " + mapLevel);
+    public ItemTable(List<Item> items) {
+        if (items == null || items.isEmpty()) {
+            throw new IllegalArgumentException("Item list cannot be null or empty.");
         }
+        this.items = items;
+        this.random = new Random();
     }
 
     public Item drawRandomItem() {
