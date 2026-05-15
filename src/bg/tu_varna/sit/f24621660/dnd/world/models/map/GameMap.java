@@ -29,17 +29,16 @@ public class GameMap {
     private boolean isValidBounds(int x, int y) {
         return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
     }
-
     @Override
-    public String toString() { // Преименувано от getGameMap()
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
-                builder.append(grid[row][col]);
+                builder.append(grid[row][col]).append("  ");
             }
             builder.append(System.lineSeparator());
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 
 

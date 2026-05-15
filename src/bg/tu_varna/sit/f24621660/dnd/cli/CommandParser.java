@@ -3,8 +3,8 @@ package bg.tu_varna.sit.f24621660.dnd.cli;
 import bg.tu_varna.sit.f24621660.dnd.cli.command.Command;
 import bg.tu_varna.sit.f24621660.dnd.cli.command.CommandFactory;
 import bg.tu_varna.sit.f24621660.dnd.core.GameContext;
-import bg.tu_varna.sit.f24621660.dnd.core.GameState;
-import bg.tu_varna.sit.f24621660.dnd.core.states.State;
+
+import java.util.Arrays;
 
 public class CommandParser {
     private final CommandFactory commandFactory;
@@ -15,41 +15,44 @@ public class CommandParser {
 
     public String processInput(GameContext context, String input) {
         if (input == null || input.trim().isEmpty()) {
-            return "Моля, въведете команда.";
+            return "Please enter a command.";
         }
 
-        String lowerInput = input.trim().toLowerCase();
-        String commandName = extractCommandName(lowerInput);
+        String[] tokens = input.trim().toLowerCase().split("\\s+");
 
-        String[] args = extractArguments(lowerInput, commandName);
+        String commandName = extractCommandName(tokens);
+        String[] args = extractArguments(tokens, commandName);
 
-        State currentState = GameState.current();
-        Command command = commandFactory.getCommand(currentState, commandName);
+        Command command = commandFactory.getCommand(commandName);
 
         if (command == null) {
-            return "Непозната команда или не може да се използва в текущия режим (" + currentState + ").";
+            return "Unknown command: '" + commandName + "'.";
         }
 
         return command.execute(context, args);
     }
 
-    private String extractCommandName(String input) {
-        if (input.startsWith("move ") || input.startsWith("attack ") || input.startsWith("loot ") || input.startsWith("save as")) {
-            String[] parts = input.split("\\s+");
-            if (parts.length >= 2) {
-                return parts[0] + " " + parts[1];
-            }
-        }
-        return input.split("\\s+")[0];
-    }
+    private String[] extractArguments(String[] tokens, String commandName) {
+        int commandWordsCount = commandName.split(" ").length;
 
-    private String[] extractArguments(String input, String commandName) {
-        String argsString = input.substring(commandName.length()).trim();
-
-        if (argsString.isEmpty()) {
+        if (tokens.length <= commandWordsCount) {
             return new String[0];
         }
 
-        return argsString.split("\\s+");
+        return Arrays.copyOfRange(tokens, commandWordsCount, tokens.length);
+    }
+
+    private String extractCommandName(String[] tokens) {
+        if (tokens.length >= 2 && isTwoWordCommand(tokens[0])) {
+            return tokens[0] + " " + tokens[1];
+        }
+
+        return tokens[0];
+    }
+
+    private boolean isTwoWordCommand(String firstWord) {
+        return firstWord.equals("move") ||
+                firstWord.equals("attack") ||
+                firstWord.equals("loot");
     }
 }

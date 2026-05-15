@@ -1,11 +1,9 @@
 package bg.tu_varna.sit.f24621660.dnd.cli.command.hero_commands.attack;
 
-import bg.tu_varna.sit.f24621660.dnd.cli.command.Command;
-import bg.tu_varna.sit.f24621660.dnd.core.GameContext;
+import bg.tu_varna.sit.f24621660.dnd.combat.AttackType;
 
-public class AttackPowerCommand implements Command {
-    @Override
-    public String execute(GameContext context, String[] args) {
-        return "";
+public class AttackPowerCommand extends BaseAttackCommand {
+    public AttackPowerCommand() {
+        super(AttackType.POWER);
     }
 }

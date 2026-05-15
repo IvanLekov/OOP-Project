@@ -24,7 +24,7 @@ public class NewGameCommand implements Command {
     public String execute(GameContext context, String[] args) {
 
         if (args == null || args.length == 0) {
-            return "Error: missing race input";
+            return "Missing race input";
         }
 
         String raceInput = args[0].trim().toLowerCase();
@@ -37,15 +37,15 @@ public class NewGameCommand implements Command {
         };
 
         if (hero == null) {
-            return "Error: Unknown race '" + args[0] + ".";
+            return "Unknown race '" + args[0] + ".";
         }
 
         LevelData levelData = levelBuilder.buildLevel(1);
 
         context.setHero(hero);
-        context.setGameMap(levelData.getMap());
-        context.setMapManager(levelData.getMapManager());
-        context.setItemTable(levelData.getItemTable());
+        context.setGameMap(levelData.map());
+        context.setMapManager(levelData.mapManager());
+        context.setItemTable(levelData.itemTable());
 
         GameState.changeTo(State.EXPLORATION);
 

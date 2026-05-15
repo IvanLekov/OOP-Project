@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.world;
 
 import bg.tu_varna.sit.f24621660.dnd.world.models.map.GameMap;
-import bg.tu_varna.sit.f24621660.dnd.world.models.enums.InteractionType;
+import bg.tu_varna.sit.f24621660.dnd.world.models.map.InteractionType;
 import bg.tu_varna.sit.f24621660.dnd.world.models.map.Position;
 
 public class GameMapManager {

@@ -15,4 +15,8 @@ public abstract class OffensiveItem extends Item {
         double amped = baseStat + (baseStat * this.damageIncrease);
         return (int) Math.round(amped);
     }
+
+    public double getDamageIncrease() {
+        return damageIncrease;
+    }
 }

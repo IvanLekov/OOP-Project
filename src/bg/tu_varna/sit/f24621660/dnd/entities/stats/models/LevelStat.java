@@ -13,4 +13,9 @@ public class LevelStat implements Progressable {
     public void next() {
         this.value++;
     }
+
+    @Override
+    public int getValue() {
+        return value;
+    }
 }

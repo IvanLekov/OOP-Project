@@ -1,17 +1,14 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.hero;
 
-import bg.tu_varna.sit.f24621660.dnd.core.GameState;
-import bg.tu_varna.sit.f24621660.dnd.core.states.State;
 import bg.tu_varna.sit.f24621660.dnd.entities.base.Combatant;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Attribute;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Progressable;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Resource;
 import bg.tu_varna.sit.f24621660.dnd.items.base.DefensiveItem;
+import bg.tu_varna.sit.f24621660.dnd.items.base.Item;
 import bg.tu_varna.sit.f24621660.dnd.items.base.OffensiveItem;
-import bg.tu_varna.sit.f24621660.dnd.items.equipment.Armor;
 import bg.tu_varna.sit.f24621660.dnd.items.equipment.Spell;
 import bg.tu_varna.sit.f24621660.dnd.items.equipment.Weapon;
-
 
 public abstract class Hero extends Combatant {
     private static final double RESTORE_PERCENT = 0.5;
@@ -77,14 +74,13 @@ public abstract class Hero extends Combatant {
         this.armor = armor;
     }
 
-    public void equipWeapon(OffensiveItem weapon) {
+    public void equipWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public void equipSpell(OffensiveItem spell) {
+    public void equipSpell(Spell spell) {
         this.spell = spell;
     }
-
 
     public Progressable getLevel() {
         return level;

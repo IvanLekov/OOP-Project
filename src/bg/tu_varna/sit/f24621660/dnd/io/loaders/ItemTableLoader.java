@@ -27,7 +27,6 @@ public class ItemTableLoader {
         for (String line : rawLines) {
             ItemConfig config = itemParser.parseLine(line);
 
-            // Филтрирането се случва тук, където му е мястото
             if (mapLevel >= config.getMinLevel() && mapLevel <= config.getMaxLevel()) {
                 result.add(config.getItem());
             }
