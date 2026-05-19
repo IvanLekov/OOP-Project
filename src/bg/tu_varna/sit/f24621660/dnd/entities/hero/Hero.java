@@ -1,21 +1,14 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.hero;
 
-import bg.tu_varna.sit.f24621660.dnd.core.GameState;
-import bg.tu_varna.sit.f24621660.dnd.core.states.State;
+import bg.tu_varna.sit.f24621660.dnd.combat.models.AttackType;
 import bg.tu_varna.sit.f24621660.dnd.entities.base.Combatant;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Attribute;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Progressable;
 import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers.Resource;
 import bg.tu_varna.sit.f24621660.dnd.items.base.DefensiveItem;
 import bg.tu_varna.sit.f24621660.dnd.items.base.OffensiveItem;
-import bg.tu_varna.sit.f24621660.dnd.items.equipment.Armor;
-import bg.tu_varna.sit.f24621660.dnd.items.equipment.Spell;
-import bg.tu_varna.sit.f24621660.dnd.items.equipment.Weapon;
 
-
-public abstract class Hero extends Combatant {
-    private static final double RESTORE_PERCENT = 0.5;
-    private static final int LEVEL_UP_POINTS = 30;
+public class Hero extends Combatant {
 
     private final Progressable level;
     private OffensiveItem weapon;
@@ -31,22 +24,19 @@ public abstract class Hero extends Combatant {
         this.spell = spell;
     }
 
-    @Override
-    public int getStrengthDamage() {
-        int basePower = this.getStrength().getValue();
-        if (this.weapon != null) {
-            return this.weapon.calculateAmpedDamage(basePower);
-        }
-        return basePower;
-    }
 
     @Override
-    public int getSpellDamage() {
-        int basePower = this.getMana().getValue();
-        if (this.spell != null) {
-            return this.spell.calculateAmpedDamage(basePower);
+    public int calculateDamage(AttackType attackType) {
+        switch (attackType) {
+            case POWER:
+                int baseStr = this.getStrength().getValue();
+                return (weapon != null) ? weapon.calculateAmpedDamage(baseStr) : baseStr;
+            case SPELL:
+                int baseMana = this.getMana().getValue();
+                return (spell != null) ? spell.calculateAmpedDamage(baseMana) : baseMana;
+            default:
+                throw new IllegalArgumentException("Unknown attack type: " + attackType);
         }
-        return basePower;
     }
 
     @Override
@@ -55,18 +45,11 @@ public abstract class Hero extends Combatant {
         this.getHealth().deplete(finalDamage);
     }
 
-    public void handleVictory() {
-        int maxHealth = getHealth().getMaxValue();
-        int restoreAmount = (int) (maxHealth * RESTORE_PERCENT);
-        this.getHealth().restore(restoreAmount);
+    public void heal(int amount) {
+        this.getHealth().restore(amount);
     }
 
     public void levelUp(int addStr, int addMana, int addHealth) {
-
-        if (addStr + addMana + addHealth != LEVEL_UP_POINTS) {
-            throw new IllegalArgumentException("The points must be 30");
-        }
-
         this.level.next();
         this.getStrength().upgrade(addStr);
         this.getMana().upgrade(addMana);
@@ -76,29 +59,15 @@ public abstract class Hero extends Combatant {
     public void equipArmor(DefensiveItem armor) {
         this.armor = armor;
     }
-
     public void equipWeapon(OffensiveItem weapon) {
         this.weapon = weapon;
     }
-
     public void equipSpell(OffensiveItem spell) {
         this.spell = spell;
     }
 
-
-    public Progressable getLevel() {
-        return level;
-    }
-
-    public OffensiveItem getWeapon() {
-        return weapon;
-    }
-
-    public DefensiveItem getArmor() {
-        return armor;
-    }
-
-    public OffensiveItem getSpell() {
-        return spell;
-    }
+    public Progressable getLevel() { return level; }
+    public OffensiveItem getWeapon() { return weapon; }
+    public DefensiveItem getArmor() { return armor; }
+    public OffensiveItem getSpell() { return spell; }
 }

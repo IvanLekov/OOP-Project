@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.providers;
 
-public interface Progressable {
+import bg.tu_varna.sit.f24621660.dnd.entities.stats.contracts.blueprints.Stat;
+
+public interface Progressable extends Stat {
     void next();
 }

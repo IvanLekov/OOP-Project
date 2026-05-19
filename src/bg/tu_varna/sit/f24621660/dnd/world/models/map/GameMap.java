@@ -1,47 +1,56 @@
 package bg.tu_varna.sit.f24621660.dnd.world.models.map;
 
-
-
 public class GameMap {
+    public static final char WALL_SYMBOL = '#';
+    public static final char PATH_SYMBOL = '.';
+
     private final char[][] grid;
 
     public GameMap(char[][] grid) {
-        this.grid = grid;
-    }
+        if (grid == null || grid.length == 0) {
+            throw new IllegalArgumentException("Map grid cannot be null or empty.");
+        }
 
-    public void setCell(int x, int y, char symbol) {
-        if (isValidBounds(x, y)) {
-            grid[x][y] = symbol;
+        this.grid = new char[grid.length][];
+
+        for (int i = 0; i < grid.length; i++) {
+            this.grid[i] = grid[i].clone();
         }
     }
 
-    public char getCell(int x, int y) {
-        if (isValidBounds(x, y)) {
-            return grid[x][y];
+    public void setCell(Position position, char symbol) {
+        if (isValidBounds(position)) {
+            grid[position.x()][position.y()] = symbol;
         }
-        return '#';
     }
 
-    public boolean isWalkable(int x, int y) {
-        return isValidBounds(x, y) && grid[x][y] != '#';
+    public char getCell(Position position) {
+        if (isValidBounds(position)) {
+            return grid[position.x()][position.y()];
+        }
+        return WALL_SYMBOL;
     }
 
-    private boolean isValidBounds(int x, int y) {
-        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
+    public boolean isWalkable(Position position) {
+        return isValidBounds(position) && getCell(position) != WALL_SYMBOL;
+    }
+
+    private boolean isValidBounds(Position position) {
+        return position.x() >= 0 && position.x() < grid.length &&
+                position.y() >= 0 && position.y() < grid[0].length;
     }
 
     @Override
-    public String toString() { // Преименувано от getGameMap()
+    public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[row].length; col++) {
-                builder.append(grid[row][col]);
+        for (char[] row : grid) {
+            for (char cell : row) {
+                builder.append(cell).append("  ");
             }
             builder.append(System.lineSeparator());
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
-
 
     public int getRowsCount() { return grid.length; }
     public int getColsCount() { return grid[0].length; }

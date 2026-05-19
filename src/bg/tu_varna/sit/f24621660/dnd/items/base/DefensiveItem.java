@@ -16,4 +16,8 @@ public abstract class DefensiveItem extends Item {
         double reduced = incomingDamage - (incomingDamage * this.damageReduction);
         return (int) Math.round(reduced);
     }
+
+    public double getDamageReduction() {
+        return damageReduction;
+    }
 }
