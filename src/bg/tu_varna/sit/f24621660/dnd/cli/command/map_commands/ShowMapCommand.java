@@ -7,12 +7,13 @@ public class ShowMapCommand implements Command {
 
     @Override
     public String execute(GameContext context, String[] args) {
-        if (context.getGameMap() == null) {
-            return "No active game.";
+
+        if (context.getCurrentLevel() == null) {
+            return "No active game or map loaded.";
         }
 
         return "\n====== Current Map =======\n" +
-                context.getGameMap().toString() + "\n" +
+                context.getCurrentLevel().map().toString() + "\n" +
                 "===========================";
     }
 }

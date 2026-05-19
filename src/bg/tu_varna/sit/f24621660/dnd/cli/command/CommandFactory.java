@@ -7,7 +7,11 @@ public class CommandFactory {
     private final Map<String, Command> registeredCommands;
 
     public CommandFactory(Map<String, Command> commands) {
-        this.registeredCommands = commands;
+        if (commands == null) {
+            throw new IllegalArgumentException("Commands map cannot be null.");
+        }
+
+        this.registeredCommands = Map.copyOf(commands);
     }
 
     public Command getCommand(String commandName) {

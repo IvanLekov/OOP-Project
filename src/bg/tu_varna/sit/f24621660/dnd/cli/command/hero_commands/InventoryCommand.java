@@ -15,32 +15,32 @@ public class InventoryCommand implements Command {
         }
 
         StringBuilder sb = new StringBuilder();
-
         sb.append("\n=== Hero Inventory ===\n");
 
         if (hero.getArmor() != null) {
-            sb.append("Armor: ").append(hero.getArmor().getName()).append("\n");
-            sb.append("Damage Reduction: ").append(hero.getArmor().getDamageReduction()).append("\n");
+            int percent = (int) Math.round(hero.getArmor().getDamageReduction() * 100);
+            sb.append(String.format("Armor:  [%s] | %d%% Damage Reduction\n", hero.getArmor().getName(), percent));
         } else {
-            sb.append("Armor: None").append("\n");
+            sb.append("Armor:  [None]\n");
         }
 
         sb.append("----------------------\n");
 
+        // Обработваме магията
         if (hero.getSpell() != null) {
-            sb.append("Spell: ").append(hero.getSpell().getName()).append("\n");
-            sb.append("Damage Increase: ").append(hero.getSpell().getDamageIncrease()).append("\n");
+            int percent = (int) Math.round(hero.getSpell().getDamageIncrease() * 100);
+            sb.append(String.format("Spell:  [%s] | %d%% Damage Increase\n", hero.getSpell().getName(), percent));
         } else {
-            sb.append("Spell: None").append("\n");
+            sb.append("Spell:  [None]\n");
         }
 
         sb.append("----------------------\n");
 
         if (hero.getWeapon() != null) {
-            sb.append("Weapon: ").append(hero.getWeapon().getName()).append("\n");
-            sb.append("Damage Increase: ").append(hero.getWeapon().getDamageIncrease()).append("\n");
+            int percent = (int) Math.round(hero.getWeapon().getDamageIncrease() * 100);
+            sb.append(String.format("Weapon: [%s] | %d%% Damage Increase\n", hero.getWeapon().getName(), percent));
         } else {
-            sb.append("Weapon: None").append("\n");
+            sb.append("Weapon: [None]\n");
         }
 
         sb.append("======================");

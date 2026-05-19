@@ -4,10 +4,9 @@ import java.util.List;
 
 public class MapParser {
 
-    // Вече не приема mapLevel
     public char[][] parse(List<String> lines) {
         if (lines == null || lines.isEmpty()) {
-            throw new IllegalStateException("Map data is invalid or empty.");
+            throw new IllegalArgumentException("Map data cannot be null or empty.");
         }
 
         int rows = lines.size();

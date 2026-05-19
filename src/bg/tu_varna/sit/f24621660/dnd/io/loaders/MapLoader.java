@@ -2,7 +2,7 @@ package bg.tu_varna.sit.f24621660.dnd.io.loaders;
 
 import bg.tu_varna.sit.f24621660.dnd.io.parsers.MapParser;
 import bg.tu_varna.sit.f24621660.dnd.io.readers.GameFileReader;
-import bg.tu_varna.sit.f24621660.dnd.io.readers.TextFileReader;
+import bg.tu_varna.sit.f24621660.dnd.world.models.map.GameMap; // Импортираме GameMap
 
 import java.util.List;
 
@@ -15,8 +15,10 @@ public class MapLoader {
         this.mapParser = mapParser;
     }
 
-    public char[][] load(String filePath) {
+    public GameMap load(String filePath) {
         List<String> rawLines = fileReader.readLines(filePath);
-        return mapParser.parse(rawLines);
+        char[][] grid = mapParser.parse(rawLines);
+
+        return new GameMap(grid);
     }
 }

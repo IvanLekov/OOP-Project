@@ -5,8 +5,8 @@ public abstract class OffensiveItem extends Item {
 
     public OffensiveItem(String name, double damageIncrease) {
         super(name);
-        if (damageIncrease < 0.0 || damageIncrease > 1.0) {
-            throw new IllegalArgumentException("Percent must be between 0.0 and 1.0");
+        if (damageIncrease < 0.0) {
+            throw new IllegalArgumentException("Percent must not be below 0.0");
         }
         this.damageIncrease = damageIncrease;
     }

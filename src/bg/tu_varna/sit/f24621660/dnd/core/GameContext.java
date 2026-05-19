@@ -1,64 +1,67 @@
 package bg.tu_varna.sit.f24621660.dnd.core;
 
-import bg.tu_varna.sit.f24621660.dnd.combat.Battle;
+import bg.tu_varna.sit.f24621660.dnd.combat.models.Battle;
 import bg.tu_varna.sit.f24621660.dnd.entities.hero.Hero;
-import bg.tu_varna.sit.f24621660.dnd.items.ItemTable;
+import bg.tu_varna.sit.f24621660.dnd.entities.stats.models.LevelUpSession;
 import bg.tu_varna.sit.f24621660.dnd.items.base.Item;
-import bg.tu_varna.sit.f24621660.dnd.world.GameMapManager;
-import bg.tu_varna.sit.f24621660.dnd.world.models.map.GameMap;
+import bg.tu_varna.sit.f24621660.dnd.world.models.level.LevelData;
+import bg.tu_varna.sit.f24621660.dnd.world.models.map.Position;
 
 public class GameContext {
 
-    private GameMap gameMap;
-    private GameMapManager mapManager;
-    private ItemTable itemTable;
-    private Item currentLoot;
-
-    private Battle currentBattle;
-
+    private final StateManager stateManager;
     private Hero hero;
 
-    private boolean isLevelUpProcessed = false;
+    private java.util.List<String> savedMapRows;
+    private Integer savedLevelIndex;
+    private Position savedHeroPosition;
 
+    private LevelUpSession currentLevelUpSession;
+    private LevelData currentLevel;
 
-    private int tempStr = 0;
-    private int tempMana = 0;
-    private int tempHealth = 0;
-    public void addTempStats(int str, int mana, int health) {
-        this.tempStr += str;
-        this.tempMana += mana;
-        this.tempHealth += health;
+    private Battle currentBattle;
+    private Item currentLoot;
+
+    public GameContext(Hero hero, StateManager stateManager) {
+        this.hero = hero;
+        this.stateManager = stateManager;
     }
-    public void clearTempStats() {
-        this.tempStr = 0;
-        this.tempMana = 0;
-        this.tempHealth = 0;
-    }
-    public int getTempStr() { return tempStr; }
-    public int getTempMana() { return tempMana; }
-    public int getTempHealth() { return tempHealth; }
-    public int getTotalTempStats() { return tempStr + tempMana + tempHealth; }
 
-    public boolean isLevelUpProcessed() { return isLevelUpProcessed; }
-    public void setLevelUpProcessed(boolean levelUpProcessed) { isLevelUpProcessed = levelUpProcessed; }
 
-    public Item getCurrentLoot() { return currentLoot; }
-    public void setCurrentLoot(Item currentLoot) { this.currentLoot = currentLoot; }
-    public void clearCurrentLoot() { this.currentLoot = null; }
-
-    public Battle getCurrentBattle() { return currentBattle; }
-    public void setCurrentBattle(Battle currentBattle) { this.currentBattle = currentBattle; }
-    public void clearCurrentBattle() { this.currentBattle = null; }
-
+    public void loadLevel(LevelData levelData) { this.currentLevel = levelData; }
+    public LevelData getCurrentLevel() { return currentLevel; }
     public Hero getHero() { return hero; }
-    public void setHero(Hero hero) { this.hero = hero; }
+    public void setHero(Hero hero) {  this.hero = hero; }
+    public StateManager getStateManager() { return stateManager; }
 
-    public GameMap getGameMap() { return gameMap; }
-    public void setGameMap(GameMap gameMap) { this.gameMap = gameMap; }
+    // --- ACTIVE EVENT HANDLERS---
 
-    public GameMapManager getMapManager() { return mapManager; }
-    public void setMapManager(GameMapManager mapManager) { this.mapManager = mapManager; }
+    public LevelUpSession getLevelUpSession() { return currentLevelUpSession; }
+    public void startLevelUpSession() { this.currentLevelUpSession = new LevelUpSession(); }
+    public void clearLevelUpSession() { this.currentLevelUpSession = null; }
+    public Battle getCurrentBattle() { return currentBattle; }
+    public void startBattle(Battle battle) { this.currentBattle = battle; }
+    public void clearBattle() { this.currentBattle = null; }
+    public Item getCurrentLoot() { return currentLoot; }
+    public void setLoot(Item item) { this.currentLoot = item; }
+    public void clearLoot() { this.currentLoot = null; }
 
-    public ItemTable getItemTable() { return itemTable; }
-    public void setItemTable(ItemTable itemTable) { this.itemTable = itemTable; }
+    // -- Load Level Specific---
+
+
+    public void setSavedMapData(int levelIndex, Position position, java.util.List<String> mapRows) {
+        this.savedLevelIndex = levelIndex;
+        this.savedHeroPosition = position;
+        this.savedMapRows = mapRows;
+    }
+
+    public Integer getSavedLevelIndex() { return savedLevelIndex; }
+    public Position getSavedHeroPosition() { return savedHeroPosition; }
+    public java.util.List<String> getSavedMapRows() { return savedMapRows; }
+
+    public void clearSavedMapData() {
+        this.savedLevelIndex = null;
+        this.savedHeroPosition = null;
+        this.savedMapRows = null;
+    }
 }

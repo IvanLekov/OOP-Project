@@ -1,27 +1,27 @@
-1, 2, WEAPON, Iron Shortsword, 0.22
-1, 2, WEAPON, Hand Axe, 0.23
-1, 2, SPELL, Magic Missile, 0.22
-1, 2, SPELL, Firebolt, 0.23
+1, 1, WEAPON, Iron Shortsword, 0.25
+1, 1, WEAPON, Hand Axe, 0.25
+1, 1, SPELL, Magic Missile, 0.25
+1, 1, SPELL, Firebolt, 0.25
 1, 2, ARMOR, Leather Vest, 0.10
 1, 2, ARMOR, Hardened Leather, 0.15
 
-3, 4, WEAPON, Steel Longsword, 0.25
-3, 4, WEAPON, Heavy Mace, 0.28
-3, 4, SPELL, Lightning Strike, 0.25
-3, 4, SPELL, Ice Shard, 0.28
-3, 4, ARMOR, Chainmail, 0.18
-3, 4, ARMOR, Iron Breastplate, 0.22
+2, 2, WEAPON, Steel Longsword, 0.35
+2, 2, WEAPON, Heavy Mace, 0.40
+2, 2, SPELL, Lightning Strike, 0.35
+2, 2, SPELL, Ice Shard, 0.40
+2, 3, ARMOR, Chainmail, 0.25
+2, 3, ARMOR, Iron Breastplate, 0.30
 
-5, 7, WEAPON, Mithril Blade, 0.40
-5, 7, WEAPON, Executioner Axe, 0.45
-5, 7, SPELL, Fireball, 0.40
-5, 7, SPELL, Arcane Blast, 0.45
-5, 7, ARMOR, Steel Plate, 0.30
-5, 7, ARMOR, Mithril Mail, 0.35
+3, 3, WEAPON, Mithril Blade, 0.55
+3, 3, WEAPON, Executioner Axe, 0.60
+3, 3, SPELL, Fireball, 0.55
+3, 3, SPELL, Arcane Blast, 0.60
+3, 4, ARMOR, Steel Plate, 0.45
+3, 4, ARMOR, Mithril Mail, 0.50
 
-8, 10, WEAPON, Dragonbone Greatsword, 0.65
-8, 10, WEAPON, Blade of the Ancients, 0.75
-8, 10, SPELL, Meteor Swarm, 0.65
-8, 10, SPELL, Unbound Storms, 0.75
-8, 10, ARMOR, Dragon Scale Armor, 0.50
-8, 10, ARMOR, Obsidian Platemail, 0.60
+4, 4, WEAPON, Dragonbone Greatsword, 0.80
+4, 4, WEAPON, Blade of the Ancients, 0.90
+4, 4, SPELL, Meteor Swarm, 0.80
+4, 4, SPELL, Unbound Storms, 0.90
+4, 4, ARMOR, Dragon Scale Armor, 0.65
+4, 4, ARMOR, Obsidian Platemail, 0.75

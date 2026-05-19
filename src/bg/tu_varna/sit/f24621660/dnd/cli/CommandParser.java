@@ -19,10 +19,8 @@ public class CommandParser {
         }
 
         String[] tokens = input.trim().toLowerCase().split("\\s+");
-
-        String commandName = extractCommandName(tokens);
-        String[] args = extractArguments(tokens, commandName);
-
+        String commandName = tokens[0];
+        String[] args = Arrays.copyOfRange(tokens, 1, tokens.length);
         Command command = commandFactory.getCommand(commandName);
 
         if (command == null) {
@@ -30,29 +28,5 @@ public class CommandParser {
         }
 
         return command.execute(context, args);
-    }
-
-    private String[] extractArguments(String[] tokens, String commandName) {
-        int commandWordsCount = commandName.split(" ").length;
-
-        if (tokens.length <= commandWordsCount) {
-            return new String[0];
-        }
-
-        return Arrays.copyOfRange(tokens, commandWordsCount, tokens.length);
-    }
-
-    private String extractCommandName(String[] tokens) {
-        if (tokens.length >= 2 && isTwoWordCommand(tokens[0])) {
-            return tokens[0] + " " + tokens[1];
-        }
-
-        return tokens[0];
-    }
-
-    private boolean isTwoWordCommand(String firstWord) {
-        return firstWord.equals("move") ||
-                firstWord.equals("attack") ||
-                firstWord.equals("loot");
     }
 }

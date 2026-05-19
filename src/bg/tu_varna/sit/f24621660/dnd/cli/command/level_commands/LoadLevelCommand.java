@@ -1,9 +1,8 @@
-package bg.tu_varna.sit.f24621660.dnd.cli.command.level;
+package bg.tu_varna.sit.f24621660.dnd.cli.command.level_commands;
 
 import bg.tu_varna.sit.f24621660.dnd.cli.command.Command;
 import bg.tu_varna.sit.f24621660.dnd.core.GameContext;
 import bg.tu_varna.sit.f24621660.dnd.io.readers.GameFileReader;
-import bg.tu_varna.sit.f24621660.dnd.io.readers.TextFileReader;
 
 import java.util.List;
 
@@ -17,15 +16,21 @@ public class LoadLevelCommand implements Command {
 
     @Override
     public String execute(GameContext context, String[] args) {
-        if (args.length != 1) {
+
+        if (args == null || args.length != 1) {
             return "Invalid format! Usage: load_level <number>";
         }
 
-        String targetLevel = args[0];
+        String targetLevel = args[0].trim();
+
         String filePath = "resources/map_level_" + targetLevel + ".txt";
 
         try {
             List<String> rawMapLines = fileReader.readLines(filePath);
+
+            if (rawMapLines == null || rawMapLines.isEmpty()) {
+                return "Level " + targetLevel + " file is empty or corrupted.";
+            }
 
             StringBuilder sb = new StringBuilder();
             sb.append("\n=== Map Outline: Level ").append(targetLevel).append(" ===\n");
@@ -34,10 +39,12 @@ public class LoadLevelCommand implements Command {
                 sb.append(line).append("\n");
             }
 
-            return sb.toString().trim();
+            sb.append("=============================");
+
+            return sb.toString();
 
         } catch (Exception e) {
-            return "Error: Could not load outline for level " + targetLevel + ". (File not found: " + filePath + ")";
+            return "Error: Could not load outline for level " + targetLevel;
         }
     }
 }
